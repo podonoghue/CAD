@@ -1,0 +1,9 @@
+#  Should be placed in /etc/udev/rules.d/46-usbdm.rules
+#  Note: HEX numbers must be lower case - yes really!!!!
+#
+# Allow unrestricted access to various BDMs (including USBDM & JS16 bootloader)
+#ATTR{idVendor}=="16d0", ATTR{idProduct}=="06a5", SYMLINK+="usbdm%n",           MODE:="0666"
+#
+# Allow unrestricted access to Aquila CDC serial port (named ttyAquila0 ...)
+SUBSYSTEM=="tty", ATTRS{idVendor}=="1a86", MODE="0666", SYMLINK+="ttyAquila%n"
+#

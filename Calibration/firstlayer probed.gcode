@@ -8,7 +8,7 @@ M140 S60 ; custom bed temp
 M190 S60 ; custom bed temp
 M104 S160 T0 ; custom hot end temp minus 50 degrees
 G28 ; home all axes
-;G29 ; probe ABL
+G29 ; probe ABL
 ;M420 S1 ; restore ABL mesh
 M109 S210 T0 ; custom hot end temp 
 ;customstart

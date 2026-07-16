@@ -19,6 +19,7 @@ class DrawGuide:
 	class SegmentHelper:
 		
 # class DrawGuide:.SegmentHelper
+# Creates a connected sketch i.e. an outline
 #========================================================
 		__slots__ = ['sketch', 'reference', 'firstX', 'firstY', 'lastX', 'lastY', 'firstSegment', 'lastSegment']
 		
@@ -274,21 +275,10 @@ def export_MotiseAndTenon():
 			length     = guide[0]
 			lengthName = guide[1]
 
-			fix = 0;			
-#			if (width<=7):
-#				if (length <= 7.95):
-#					fix = 0.3
-#				elif (length<=8):
-#					fix = 0.81
-#				
-#			if (fix >0):
-#				print("Width = ",  width, "Length = ", length, "Fix = ", fix)
-				
 			name = (widthName+'x'+lengthName+' ('+str(lengthDelta)+'-'+str(widthDelta)+'-'+str(slotDelta)+')').replace('/','.').replace('"','')
-	#			print (name, '=>', f"{width:.1f}", f"{length:.1f}")
+#			print (name, '=>', f"{width:.1f}", f"{length:.1f}")
 			
 			sheet.set("Length", str(length))
-			sheet.set("Fix", str(fix))
 			sheet.set("Upper_Title", "'"+lengthName)
 			sheet.set("Lower_Title", "'"+widthName)
 			sheet.recompute()
@@ -299,7 +289,6 @@ def export_MotiseAndTenon():
 			
 	sheet.set("Width_Delta",  "0")
 	sheet.set("Length_Delta", "0")
-	sheet.set("Fix", ".01")
 
 tests = [
 [0,0],	# 0		-	1/4 x 5/16
@@ -354,22 +343,11 @@ def export_TestMotiseAndTenon():
 	
 	length     = guide[0]
 	lengthName = guide[1]
-	
-	fix = 0;			
-#	if (width<=7):
-#		if (length <= 7.95):
-#			fix = 0.3
-#		elif (length<=8):
-#			fix = 0.81
-#		
-#	if (fix >0):
-#		print("Width = ",  width, "Length = ", length, "Fix = ", fix)
 		
 	name = (widthName+'x'+lengthName+' ('+str(lengthDelta)+'-'+str(widthDelta)+'-'+str(slotDelta)+')').replace('/','.').replace('"','')
 #			print (name, '=>', f"{width:.1f}", f"{length:.1f}")
 	
 	sheet.set("Length", str(length))
-	sheet.set("Fix", str(fix))
 	sheet.set("Upper_Title", "'"+lengthName)
 	sheet.set("Lower_Title", "'"+widthName)
 	sheet.recompute()
@@ -460,11 +438,11 @@ def export_YAxisGuides():
 		upperName = yAxis[3]
 		slotDelta = yAxis[4]
 		name      = (lowerName + 'x' + upperName+' ('+str(slotDelta)+')').replace('/','.')
-		sheet.set("Width",       str(width))
-		sheet.set("Length",      str(length))
+		sheet.set("Y_Tenon_Width",       str(width))
+		sheet.set("Y_Tenon_Length",      str(length))
+		sheet.set("Y_Slot_Delta",  str(slotDelta))
 		sheet.set("Upper_Title", "'"+upperName)
 		sheet.set("Lower_Title", "'"+lowerName)
-		sheet.set("Slot_Delta",  str(slotDelta))
 		sheet.recompute()
 		doc.recompute()
 #		export_root(name="Y-Axis Guide "+name, label='Y Tenon')
@@ -520,9 +498,9 @@ export_folder = os.path.join(base_path, f"FMT Guides - {current_datetime}")
 if not os.path.exists(export_folder):
 	os.makedirs(export_folder)
 
-export_TestMotiseAndTenon()
-#export_MotiseAndTenon()
-#export_DowelCentres()
-#export_YAxisGuides()
+#export_TestMotiseAndTenon()
+export_MotiseAndTenon()
+export_DowelCentres()
+export_YAxisGuides()
 #export_Centres()
 exit
